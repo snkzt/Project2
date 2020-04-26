@@ -1,6 +1,6 @@
-# v-project2
+# Noughts and Crosses
 
-This project is the second of the five programming hands on projects. 
+Hands on programmig - Code a classic game!!! 
 
 ## Description
 
