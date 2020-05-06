@@ -7,7 +7,7 @@ function greetClick () {
   }
 }
 
-function sayHi() {
-  console.log('hello world!');
+function sayHi(square) {
+  console.log(`hello world from the grid ${square.target.id}!`);
 }
 
