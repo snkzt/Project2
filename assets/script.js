@@ -1,5 +1,10 @@
-document.getElementById("grid").addEventListener('click', sayHi);
 
-function sayHi(event) {
-  console.log(`hello world from the grid ${event.target.id}!`);
-}
+document.getElementById("grid").addEventListener('click', yourMark);
+
+function yourMark(event) {
+  if (event.target.innerText === '') {
+     event.target.innerText = "O";
+   } else {
+     event.target.innerText = '';
+     }
+    }
