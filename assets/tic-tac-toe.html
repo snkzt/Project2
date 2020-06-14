@@ -4,37 +4,78 @@
 <head>
   <meta charset = "UTF-8">
   <title>Tic Tac Toe</title>
-
+  
   <link rel = "stylesheet" href = "style.css">
-
 </head>
 
 <body>
-    
-  <table id = "grid">
-      <tr>
-        <td class = "cell" id = "0"></td>
-        <td class = "cell" id = "1"></td>
-        <td class = "cell" id = "2"></td>
-      </tr>
-      <tr>
-        <td class = "cell" id = "3" ></td>
-        <td class = "cell" id = "4"></td>
-        <td class = "cell" id = "5"></td>
-      </tr>
-      <tr>
-        <td class = "cell" id = "6" ></td>
-        <td class = "cell" id = "7"></td>
-        <td class = "cell" id = "8"></td>
-      </tr>
-  </table>
- 
-  <div class = "endgame">
-    <div class = "text"></div>
+  <div class = "wrapper">
+      <table id = "grid">
+        <tr>
+          <td class = "cell" id = "0"></td>
+          <td class = "cell" id = "1"></td>
+          <td class = "cell" id = "2"></td>
+        </tr>
+        <tr>
+          <td class = "cell" id = "3" ></td>
+          <td class = "cell" id = "4"></td>
+          <td class = "cell" id = "5"></td>
+        </tr>
+        <tr>
+          <td class = "cell" id = "6" ></td>
+          <td class = "cell" id = "7"></td>
+          <td class = "cell" id = "8"></td>
+        </tr>
+      </table>
+
+    <div class = "reload">
+      <svg class="bi-arrow-clockwise" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M3.17 6.706a5 5 0 0 1 7.103-3.16.5.5 0 1 0 .454-.892A6 6 0 1 0 13.455 5.5a.5.5 0 0 0-.91.417 5 5 0 1 1-9.375.789z"/>
+        <path fill-rule="evenodd" d="M8.147.146a.5.5 0 0 1 .707 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 1 1-.707-.708L10.293 3 8.147.854a.5.5 0 0 1 0-.708z"/>
+      </svg>
+    </div>
+
+    <div class = "scoreboard">
+        <p>Player(X) <spanid id = "countX">-</span></p>
+        <p>Player(O) <spanid id = "countO">-</span></p>
+        <p>Tie <span id = "tie">-</span></p>
+    </div>
+
+    <div class = "dialogue">
+      <!-- Vertically centered modal -->
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+              </div>
+              <div class="modal-body">
+                <p>Continue?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="primary" data-dismiss="modal">Yes</button>
+                <button type="button" id="secondary">See ya!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class = "endgame">
+      <div class = "text"></div>
+    </div>
+
+    <footer>
+      <div class = "img">
+        <img src = "image/git.png" id ="gh">
+      </div>
+      <div class = "gitaccount">
+        <a href = "https://github.com/snkzt">CREATED by snkzt</a>
+      </div>
+    </footer>
+
+    <script src = "script.js"></script>
   </div>
-  <button>Replay</button>
-
-  <script src = "script.js"></script>
-
 </body>
 </html>
