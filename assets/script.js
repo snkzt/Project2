@@ -92,7 +92,7 @@ function checkWin() {
 }
 
 function checkTie () {
-  if (countTurn=== 9) {
+  if (countTurn === 9) {
       window.alert("Tie game!");
       countTie++;
       scoreUpdate();
@@ -116,6 +116,7 @@ function checkContinue(event) {
   if (event.target.id === "primary") {
     document.querySelector(".dialogue").style.visibility = "hidden";
     countTurn = 0;
+    countWin = 0;
     let xs = Array.from(document.querySelectorAll(".x"));
     let os = Array.from(document.querySelectorAll(".o"));
     xs.forEach (xElement => xElement.remove());
