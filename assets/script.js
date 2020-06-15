@@ -4,6 +4,9 @@ let countOwin = 0;
 let countWin = 0;
 let countTie = 0;
 
+const cells = Array.from(document.querySelectorAll(".cell"));
+const xArr = [];
+const oArr = [];
 const winPattern = [
   [0, 1, 2],
 	[3, 4, 5],
@@ -40,23 +43,7 @@ function turn(event) {
 
 function checkWin() {
   if (countTurn > 4) {
-    const cells = Array.from(document.querySelectorAll(".cell"));
-    const xArr = [];
-    const oArr = [];
-
-    cells.forEach(function(element){ 
-      if (element.childNodes.length === 1) {
-        element.childNodes.forEach (function (eachNode) {
-          if (eachNode.className === "x") { 
-            xArr.push(element.id);
-          } else {
-            if (eachNode.className === "o") {
-              oArr.push(element.id);    
-            }
-          }
-        })
-      }
-    })
+    makeArr();
     winPattern.forEach(function(pattern) {
       const win = pattern.toString();
       const x = xArr.toString();
@@ -89,12 +76,28 @@ function checkWin() {
   }
 }
 
+function makeArr() {
+  cells.forEach(function(element){ 
+    if (element.childNodes.length === 1) {
+      element.childNodes.forEach (function (eachNode) {
+        if (eachNode.className === "x") { 
+          xArr.push(element.id);
+        } else {
+          if (eachNode.className === "o") {
+            oArr.push(element.id);    
+          }
+        }
+      })
+    }
+  })
+}
+
 function checkTie() {
   if (countTurn=== 9) {
-      window.alert("Tie game!");
-      countTie++;
-      scoreUpdate();
-      askContinue();
+    window.alert("Tie game!");
+    countTie++;
+    scoreUpdate();
+    askContinue();
   }
 }
 
