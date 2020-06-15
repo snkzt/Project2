@@ -3,6 +3,8 @@ let countXwin = 0;
 let countOwin = 0;
 let countWin = 0;
 let countTie = 0;
+let xYes = 0;
+let oYes = 0;
 
 const cells = Array.from(document.querySelectorAll(".cell"));
 const xArr = [];
@@ -48,8 +50,6 @@ function checkWin() {
       const win = pattern.toString();
       const x = xArr.toString();
       const o = oArr.toString();
-      let xYes = 0;
-      let oYes = 0;
 
       for (i = 0; i < win.length; i++) {
         if (x.includes(win[i]) === true) {
@@ -58,23 +58,10 @@ function checkWin() {
         if (o.includes(win[i]) === true) {
           oYes++;
         }
-        if (xYes >= 5) {
-          window.alert("X win!");
-          countXwin++;
-          countWin++;
-          scoreUpdate();
-          askContinue();
-        } else if (oYes >= 5) {
-          window.alert("O win!");
-          countOwin++;
-          countWin++;
-          scoreUpdate();
-          askContinue();
-        }
+        judge();
       }
-    })
-  }
-}
+   })
+ }
 
 function makeArr() {
   cells.forEach(function(element){ 
@@ -99,6 +86,31 @@ function checkTie() {
     scoreUpdate();
     askContinue();
   }
+}
+
+function judge() {
+  if (xYes >= 5) {
+    document.querySelector(".judge").style.visibility = "visible";
+    let node = document.createElement("P");
+    let textnode = document.createTextNode("X win!");
+    node.appendChild(textnode);
+    document.getElementById("verdict").appendChild(node);
+    countXwin++;
+    countWin++;
+    scoreUpdate();
+    askContinue();
+  } else if (oYes >= 5) {
+    document.querySelector(".judge").style.visibility = "visible";
+    let node = document.createElement("P");
+    let textnode = document.createTextNode("O win!");
+    node.appendChild(textnode);
+    document.getElementById("verdict").appendChild(node);
+    countOwin++;
+    countWin++;
+    scoreUpdate();
+    askContinue();
+  }
+}
 }
 
 function scoreUpdate() {

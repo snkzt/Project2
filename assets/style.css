@@ -89,7 +89,7 @@ table tr td:last-child  {
   z-index: 2;
 }
 
-.modal-body{
+.modal-body #verdict {
   font-size: large;
   padding: 5px;
 }
@@ -101,6 +101,34 @@ table tr td:last-child  {
 }
 
 #secondary {
+  height: 30px;
+  width: 65px;
+  margin-left: 5px;
+ }
+
+ .judge {
+  visibility: hidden;
+  text-align: center;
+  width: 200px;
+  height: 80px;
+  background-color: hsl(0, 0%, 91%);
+  padding: 0px 10px;
+  border: solid 1px #a7a5a5;
+  opacity: 0.95;
+  border-radius: 2px;
+  position: absolute;
+  top: 110px;
+  left: 350px;
+  z-index: 2;
+}
+
+#first {
+  height: 30px;
+  width: 60px;
+  margin-left: 5px;
+}
+
+#second {
   height: 30px;
   width: 65px;
   margin-left: 5px;
