@@ -20,15 +20,15 @@ document.getElementById("grid").addEventListener('click', turn);
 function turn(event) {
   if (event.target.childNodes.length === 0) {
     countTurn++;
-    if (countTurn% 2 === 1) {
+    if (countTurn % 2 === 1) {
       const x = document.createElement("IMG");
-      x.setAttribute("class","x");
-      x.setAttribute("src","image/X.png");
+      x.setAttribute("class", "x");
+      x.setAttribute("src", "image/X.png");
       event.target.appendChild(x);
     } else {
       const o = document.createElement("IMG");
-      o.setAttribute("class","o");
-      o.setAttribute("src","image/O.png");
+      o.setAttribute("class", "o");
+      o.setAttribute("src", "image/O.png");
       event.target.appendChild(o);
     }
     checkWin();
@@ -39,60 +39,58 @@ function turn(event) {
 }
 
 function checkWin() {
-  if (countTurn> 4) {
+  if (countTurn > 4) {
     const cells = Array.from(document.querySelectorAll(".cell"));
     const xArr = [];
     const oArr = [];
 
-  cells.forEach(function(element){ 
-    if (element.childNodes.length === 1) {
-      element.childNodes.forEach (function (eachNode) {
-        if (eachNode.className === "x") { 
-          xArr.push(element.id);
-        } else {
-          if (eachNode.className === "o") {
-            oArr.push(element.id);    
+    cells.forEach(function(element){ 
+      if (element.childNodes.length === 1) {
+        element.childNodes.forEach (function (eachNode) {
+          if (eachNode.className === "x") { 
+            xArr.push(element.id);
+          } else {
+            if (eachNode.className === "o") {
+              oArr.push(element.id);    
+            }
           }
-        }
-      })
-    }
-  })
-  winPattern.forEach(function(pattern) {
-    let win = pattern.toString();
-    let x = xArr.toString();
-    let o = oArr.toString();
-    let xYes = 0;
-    let oYes = 0;
-
-    for (i = 0; i < win.length; i++) {
-      if (x.includes(win[i]) === true) {
-        xYes++
-      } 
-      if (o.includes(win[i]) === true) {
-        oYes++
+        })
       }
-      if (xYes >= 5) {
-        window.alert("X win!");
-        countXwin++;
-        countWin++
-        scoreUpdate();
-        askContinue();
-      } else {
-        if (oYes >= 5) {
+    })
+    winPattern.forEach(function(pattern) {
+      const win = pattern.toString();
+      const x = xArr.toString();
+      const o = oArr.toString();
+      let xYes = 0;
+      let oYes = 0;
+
+      for (i = 0; i < win.length; i++) {
+        if (x.includes(win[i]) === true) {
+          xYes++;
+        } 
+        if (o.includes(win[i]) === true) {
+          oYes++;
+        }
+        if (xYes >= 5) {
+          window.alert("X win!");
+          countXwin++;
+          countWin++;
+          scoreUpdate();
+          askContinue();
+        } else if (oYes >= 5) {
           window.alert("O win!");
           countOwin++;
-          countWin++
+          countWin++;
           scoreUpdate();
           askContinue();
         }
       }
-    }
-  })
+    })
   }
 }
 
-function checkTie () {
-  if (countTurn === 9) {
+function checkTie() {
+  if (countTurn=== 9) {
       window.alert("Tie game!");
       countTie++;
       scoreUpdate();
@@ -100,7 +98,7 @@ function checkTie () {
   }
 }
 
-function scoreUpdate () {
+function scoreUpdate() {
   document.getElementById("countX").innerText = countXwin;
   document.getElementById("countO").innerText = countOwin;
   document.getElementById("tie").innerText = countTie;
@@ -116,16 +114,13 @@ function checkContinue(event) {
   if (event.target.id === "primary") {
     document.querySelector(".dialogue").style.visibility = "hidden";
     countTurn = 0;
-    countWin = 0;
-    let xs = Array.from(document.querySelectorAll(".x"));
-    let os = Array.from(document.querySelectorAll(".o"));
+    const xs = Array.from(document.querySelectorAll(".x"));
+    const os = Array.from(document.querySelectorAll(".o"));
     xs.forEach (xElement => xElement.remove());
     os.forEach (oElement => oElement.remove());
-  } else {
-    if (event.target.id === "secondary") {
-      document.location.reload();
-      document.querySelector(".dialogue").style.visibility = "hidden";
-    }
+  } else if (event.target.id === "secondary") {
+    document.location.reload();
+    document.querySelector(".dialogue").style.visibility = "hidden";
   }  
 }
 
@@ -141,9 +136,7 @@ function checkRefresh(event) {
   if (event.target.id === "secondary") {
     document.location.reload();
     document.querySelector(".dialogue").style.visibility = "hidden";
-  } else {
-    if (event.target.id === "primary") {
-      document.querySelector(".dialogue").style.visibility = "hidden";
-    }
+  } else if (event.target.id === "primary") {
+    document.querySelector(".dialogue").style.visibility = "hidden";
   }  
 }
