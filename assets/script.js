@@ -3,8 +3,10 @@ let countXwin = 0;
 let countOwin = 0;
 let countWin = 0;
 let countTie = 0;
-let xYes = 0;
-let oYes = 0;
+let countX = 0;
+let countY = 0;
+// let xYes = 0;
+// let oYes = 0;
 
 const cells = Array.from(document.querySelectorAll(".cell"));
 const xArr = [];
@@ -46,22 +48,59 @@ function turn(event) {
 function checkWin() {
   if (countTurn > 4) {
     makeArr();
+    console.log(xArr,"xArr")
+    console.log(oArr,"oArr")
     winPattern.forEach(function(pattern) {
-      const win = pattern.toString();
-      const x = xArr.toString();
-      const o = oArr.toString();
-
-      for (i = 0; i < win.length; i++) {
-        if (x.includes(win[i]) === true) {
-          xYes++;
-        } 
-        if (o.includes(win[i]) === true) {
-          oYes++;
+      console.log(pattern,"pattern")
+      for (i = 0; i < pattern.length; i++) {
+        for (j = 0; j < xArr.length; j++) {
+          if (pattern[i] == xArr[j]) {
+            console.log(pattern[i])
+            console.log(xArr[j],"xArr")
+            countX++
+            console.log(countX,"countX")
+          } else if (pattern[i] == oArr[j]) {
+            console.log(oArr[j],"oArr")
+            countO++
+          }
+          if (countX === 3) {
+            xWin();
+          } else if (countO === 3) {
+            oWin();
+          }
         }
-        judge();
       }
-   })
- }
+      countX = 0;
+      countO = 0;
+    })
+  }
+}
+
+function xWin() {
+  judgeX();
+  countXwin++;
+  countWin++;
+  scoreUpdate();
+  askContinue();
+}
+
+function oWin() {
+  judgeO();
+  countOwin++;
+  countWin++;
+  scoreUpdate();
+  askContinue();
+}
+
+
+function checkTie() {
+  if (countTurn === 9) {
+    judgeTie();
+    countTie++;
+    scoreUpdate();
+    askContinue();
+  }
+}
 
 function makeArr() {
   cells.forEach(function(element){ 
@@ -69,48 +108,36 @@ function makeArr() {
       element.childNodes.forEach (function (eachNode) {
         if (eachNode.className === "x") { 
           xArr.push(element.id);
-        } else {
-          if (eachNode.className === "o") {
+        } else if (eachNode.className === "o") {
             oArr.push(element.id);    
-          }
         }
       })
     }
   })
 }
 
-function checkTie() {
-  if (countTurn=== 9) {
-    window.alert("Tie game!");
-    countTie++;
-    scoreUpdate();
-    askContinue();
-  }
+function judgeX() {
+  document.querySelector(".judge").style.visibility = "visible";
+  const nodeX = document.createElement("P");
+  const textnodeX = document.createTextNode("X win!");
+  nodeX.appendChild(textnodeX);
+  document.getElementById("verdict").appendChild(nodeX);
 }
 
-function judge() {
-  if (xYes >= 5) {
-    document.querySelector(".judge").style.visibility = "visible";
-    let node = document.createElement("P");
-    let textnode = document.createTextNode("X win!");
-    node.appendChild(textnode);
-    document.getElementById("verdict").appendChild(node);
-    countXwin++;
-    countWin++;
-    scoreUpdate();
-    askContinue();
-  } else if (oYes >= 5) {
-    document.querySelector(".judge").style.visibility = "visible";
-    let node = document.createElement("P");
-    let textnode = document.createTextNode("O win!");
-    node.appendChild(textnode);
-    document.getElementById("verdict").appendChild(node);
-    countOwin++;
-    countWin++;
-    scoreUpdate();
-    askContinue();
-  }
+function judgeO() {
+  document.querySelector(".judge").style.visibility = "visible";
+  const nodeO = document.createElement("P");
+  const textnodeO = document.createTextNode("O win!");
+  nodeO.appendChild(textnodeO);
+  document.getElementById("verdict").appendChild(nodeO);
 }
+
+function judgeTie() {
+  document.querySelector(".judge").style.visibility = "visible";
+  const nodeT = document.createElement("P");
+  const textnodeT = document.createTextNode("Tie game!");
+  nodeT.appendChild(textnodeT);
+  document.getElementById("verdict").appendChild(nodeT);
 }
 
 function scoreUpdate() {
@@ -120,22 +147,22 @@ function scoreUpdate() {
 }
 
 function askContinue() {
-  document.querySelector(".dialogue").style.visibility = "visible";
-  document.querySelector(".dialogue").addEventListener('click', checkContinue);
+  document.querySelector(".judge").addEventListener('click', checkContinue);
 }
 
 //check continue after a game over -> yes: clear all cells but scoreboard, No: reload the page
 function checkContinue(event) {
-  if (event.target.id === "primary") {
-    document.querySelector(".dialogue").style.visibility = "hidden";
+  if (event.target.id === "first") {
+    document.querySelector(".judge").style.visibility = "hidden";
     countTurn = 0;
     const xs = Array.from(document.querySelectorAll(".x"));
     const os = Array.from(document.querySelectorAll(".o"));
     xs.forEach (xElement => xElement.remove());
     os.forEach (oElement => oElement.remove());
-  } else if (event.target.id === "secondary") {
+    document.getElementById("verdict").querySelector("P").remove();
+  } else if (event.target.id === "second") {
     document.location.reload();
-    document.querySelector(".dialogue").style.visibility = "hidden";
+    document.querySelector(".judge").style.visibility = "hidden";
   }  
 }
 
@@ -155,3 +182,19 @@ function checkRefresh(event) {
     document.querySelector(".dialogue").style.visibility = "hidden";
   }  
 }
+
+
+// //check continue after a game over -> yes: clear all cells but scoreboard, No: reload the page
+// function checkContinue(event) {
+//   if (event.target.id === "primary") {
+//     document.querySelector(".dialogue").style.visibility = "hidden";
+//     countTurn = 0;
+//     const xs = Array.from(document.querySelectorAll(".x"));
+//     const os = Array.from(document.querySelectorAll(".o"));
+//     xs.forEach (xElement => xElement.remove());
+//     os.forEach (oElement => oElement.remove());
+//   } else if (event.target.id === "secondary") {
+//     document.location.reload();
+//     document.querySelector(".dialogue").style.visibility = "hidden";
+//   }  
+// }
