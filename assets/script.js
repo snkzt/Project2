@@ -140,6 +140,7 @@ function judgeX() {
   const textnodeX = document.createTextNode("X win!");
   nodeX.appendChild(textnodeX);
   document.getElementById("verdict").appendChild(nodeX);
+  document.getElementById("grid").removeEventListener("click", turn);
 }
 
 function judgeO() {
@@ -148,6 +149,7 @@ function judgeO() {
   const textnodeO = document.createTextNode("O win!");
   nodeO.appendChild(textnodeO);
   document.getElementById("verdict").appendChild(nodeO);
+  document.getElementById("grid").removeEventListener("click", turn);
 }
 
 function judgeTie() {
@@ -156,6 +158,7 @@ function judgeTie() {
   const textnodeT = document.createTextNode("Tie game!");
   nodeT.appendChild(textnodeT);
   document.getElementById("verdict").appendChild(nodeT);
+  document.getElementById("grid").removeEventListener("click", turn);
 }
 
 function scoreUpdate() {
@@ -172,6 +175,7 @@ function askContinue() {
 function checkContinue(event) {
   if (event.target.id === "first") {
     document.querySelector(".judge").style.visibility = "hidden";
+    document.getElementById("grid").addEventListener("click", turn);
     countTurn = 0;
     const xs = Array.from(document.querySelectorAll(".x"));
     const os = Array.from(document.querySelectorAll(".o"));
