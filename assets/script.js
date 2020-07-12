@@ -3,14 +3,14 @@ let countXwin = 0;
 let countOwin = 0;
 let countWin = 0;
 let countTie = 0;
-let countX = 0;
-let countY = 0;
+// let countX = 0;
+// let countO = 0;
 // let xYes = 0;
 // let oYes = 0;
 
 const cells = Array.from(document.querySelectorAll(".cell"));
-const xArr = [];
-const oArr = [];
+let xArr = [];
+let oArr = [];
 const winPattern = [
   [0, 1, 2],
 	[3, 4, 5],
@@ -22,7 +22,7 @@ const winPattern = [
 	[2, 4, 6]
 ] 
 
-document.getElementById("grid").addEventListener('click', turn);
+document.getElementById("grid").addEventListener("click", turn);
 
 function turn(event) {
   if (event.target.childNodes.length === 0) {
@@ -45,36 +45,54 @@ function turn(event) {
   }
 }
 
+
 function checkWin() {
   if (countTurn > 4) {
     makeArr();
     console.log(xArr,"xArr")
-    console.log(oArr,"oArr")
     winPattern.forEach(function(pattern) {
-      console.log(pattern,"pattern")
-      for (i = 0; i < pattern.length; i++) {
-        for (j = 0; j < xArr.length; j++) {
-          if (pattern[i] == xArr[j]) {
-            console.log(pattern[i])
-            console.log(xArr[j],"xArr")
-            countX++
-            console.log(countX,"countX")
-          } else if (pattern[i] == oArr[j]) {
-            console.log(oArr[j],"oArr")
-            countO++
-          }
-          if (countX === 3) {
-            xWin();
-          } else if (countO === 3) {
-            oWin();
+      for (let i = 0; i < xArr.length; i++) {
+        console.log(xArr, "xArrfor")
+        console.log(pattern, "patternfor")
+        if (parseInt(xArr[i]) === pattern[0]) {
+          console.log(xArr[i],"xArr[i]")
+          console.log(pattern[0], "pattern[0]")
+          if (xArr[i+1] && parseInt(xArr[i+1]) === pattern[1]) {
+            console.log(xArr[i+1],"xArr[i+1]")
+            console.log(pattern[1], "pattern[1]")
+            if (xArr[i+2] && parseInt(xArr[i+2]) === pattern[2]) {
+              console.log(xArr[i+2],"xArr[i+2]")
+              console.log(pattern[2], "pattern[2]")
+              xWin();
+            }
           }
         }
       }
-      countX = 0;
-      countO = 0;
-    })
+        for (let j = 0; j < oArr.length; j++) {
+          console.log(oArr, "oArrfor")
+          console.log(pattern, "patternfor")
+          if (parseInt(oArr[j]) === pattern[0]) {
+            console.log(oArr[j],"oArr[j]")
+            console.log(pattern[0], "pattern[0]")
+            if (oArr[j+1] && parseInt(oArr[j+1]) === pattern[1]) {
+              console.log(oArr[j+1],"oArr[j+1]")
+              console.log(pattern[1], "pattern[1]")
+              if (oArr[j+2] && parseInt(oArr[j+2]) === pattern[2]) {
+                console.log(oArr[j+2],"xArr[j+2]")
+                console.log(pattern[2], "pattern[2]")
+                oWin();
+              }
+            }
+          }
+        }
+      })
+      xArr = [];
+      oArr = [];
+    }
   }
-}
+
+
+  
 
 function xWin() {
   judgeX();
@@ -147,7 +165,7 @@ function scoreUpdate() {
 }
 
 function askContinue() {
-  document.querySelector(".judge").addEventListener('click', checkContinue);
+  document.querySelector(".judge").addEventListener("click", checkContinue);
 }
 
 //check continue after a game over -> yes: clear all cells but scoreboard, No: reload the page
@@ -167,11 +185,11 @@ function checkContinue(event) {
 }
 
 //check continue during a game -> yes: keep the status as is, No: reload the page
-document.querySelector(".reload").addEventListener('click', showDialogue);
+document.querySelector(".reload").addEventListener("click", showDialogue);
 
 function showDialogue() {
   document.querySelector(".dialogue").style.visibility = "visible";
-  document.querySelector(".dialogue").addEventListener('click', checkRefresh);
+  document.querySelector(".dialogue").addEventListener("click", checkRefresh);
 }
 
 function checkRefresh(event) {
@@ -184,17 +202,42 @@ function checkRefresh(event) {
 }
 
 
-// //check continue after a game over -> yes: clear all cells but scoreboard, No: reload the page
-// function checkContinue(event) {
-//   if (event.target.id === "primary") {
-//     document.querySelector(".dialogue").style.visibility = "hidden";
-//     countTurn = 0;
-//     const xs = Array.from(document.querySelectorAll(".x"));
-//     const os = Array.from(document.querySelectorAll(".o"));
-//     xs.forEach (xElement => xElement.remove());
-//     os.forEach (oElement => oElement.remove());
-//   } else if (event.target.id === "secondary") {
-//     document.location.reload();
-//     document.querySelector(".dialogue").style.visibility = "hidden";
-//   }  
-// }
+
+
+//  function checkWin() {
+//   if (countTurn > 4) {
+//     makeArr();
+//     console.log(xArr,"xArr")
+//     console.log(oArr,"oArr")
+//       for (let i = 0; i < 8; i++) {
+//         for (let j = 0; j < 3; j++) {
+//           for (let k = 0; k < xArr.length; k++) {
+//             winPattern[i]
+//             console.log([i],[j],[k],"winPattern")
+//             console.log(winPattern[i],"patternZ")
+//             let pattern = winPattern[i]
+//             console.log(pattern[j],"y２")
+
+//             if (pattern[j] == xArr[k]) {
+//               countX++
+//               console.log(countX,"countX")
+//             } else if (pattern[j] == oArr[k]) {
+//               countO++
+//               console.log(countO,"countO")
+//             }
+//             console.log([i],[j],[k],"mid")
+//             if (countX === 3) {
+//               xWin();
+//             } else if (countO === 3) {
+//               oWin();
+//             }
+//             console.log([i],[j],[k],"end") 
+//           }
+//           countX = 0;
+//           countO = 0;
+//           xArr = [];
+//           oArr = [];
+//         }
+//         }
+//     }
+//   }
