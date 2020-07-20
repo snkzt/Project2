@@ -3,10 +3,7 @@ let countXwin = 0;
 let countOwin = 0;
 let countWin = 0;
 let countTie = 0;
-// let countX = 0;
-// let countO = 0;
-// let xYes = 0;
-// let oYes = 0;
+
 
 const cells = Array.from(document.querySelectorAll(".cell"));
 let xArr = [];
@@ -49,37 +46,20 @@ function turn(event) {
 function checkWin() {
   if (countTurn > 4) {
     makeArr();
-    console.log(xArr,"xArr")
     winPattern.forEach(function(pattern) {
       for (let i = 0; i < xArr.length; i++) {
-        console.log(xArr, "xArrfor")
-        console.log(pattern, "patternfor")
         if (parseInt(xArr[i]) === pattern[0]) {
-          console.log(xArr[i],"xArr[i]")
-          console.log(pattern[0], "pattern[0]")
           if (xArr[i+1] && parseInt(xArr[i+1]) === pattern[1]) {
-            console.log(xArr[i+1],"xArr[i+1]")
-            console.log(pattern[1], "pattern[1]")
             if (xArr[i+2] && parseInt(xArr[i+2]) === pattern[2]) {
-              console.log(xArr[i+2],"xArr[i+2]")
-              console.log(pattern[2], "pattern[2]")
               xWin();
             }
           }
         }
       }
         for (let j = 0; j < oArr.length; j++) {
-          console.log(oArr, "oArrfor")
-          console.log(pattern, "patternfor")
           if (parseInt(oArr[j]) === pattern[0]) {
-            console.log(oArr[j],"oArr[j]")
-            console.log(pattern[0], "pattern[0]")
             if (oArr[j+1] && parseInt(oArr[j+1]) === pattern[1]) {
-              console.log(oArr[j+1],"oArr[j+1]")
-              console.log(pattern[1], "pattern[1]")
               if (oArr[j+2] && parseInt(oArr[j+2]) === pattern[2]) {
-                console.log(oArr[j+2],"xArr[j+2]")
-                console.log(pattern[2], "pattern[2]")
                 oWin();
               }
             }
@@ -205,43 +185,3 @@ function checkRefresh(event) {
   }  
 }
 
-
-
-
-//  function checkWin() {
-//   if (countTurn > 4) {
-//     makeArr();
-//     console.log(xArr,"xArr")
-//     console.log(oArr,"oArr")
-//       for (let i = 0; i < 8; i++) {
-//         for (let j = 0; j < 3; j++) {
-//           for (let k = 0; k < xArr.length; k++) {
-//             winPattern[i]
-//             console.log([i],[j],[k],"winPattern")
-//             console.log(winPattern[i],"patternZ")
-//             let pattern = winPattern[i]
-//             console.log(pattern[j],"y２")
-
-//             if (pattern[j] == xArr[k]) {
-//               countX++
-//               console.log(countX,"countX")
-//             } else if (pattern[j] == oArr[k]) {
-//               countO++
-//               console.log(countO,"countO")
-//             }
-//             console.log([i],[j],[k],"mid")
-//             if (countX === 3) {
-//               xWin();
-//             } else if (countO === 3) {
-//               oWin();
-//             }
-//             console.log([i],[j],[k],"end") 
-//           }
-//           countX = 0;
-//           countO = 0;
-//           xArr = [];
-//           oArr = [];
-//         }
-//         }
-//     }
-//   }
